@@ -1,6 +1,6 @@
 # FFmpeg-Debug-VSCode-Windows
 
-This guide is a modern version of [neptune46/ffmpeg-vscode](https://github.com/neptune46/ffmpeg-vscode) written four years ago. You can read itI recommend use these steps: 
+This guide is a modern version of [neptune46/ffmpeg-vscode](https://github.com/neptune46/ffmpeg-vscode) written four years ago. You can read it but I recommend use these steps: 
 
 ## Preparation
 
