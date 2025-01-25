@@ -1,6 +1,6 @@
 # FFmpeg-Debug-VSCode-Windows
 
-This guide is a modern version of [neptune46/ffmpeg-vscode](https://github.com/neptune46/ffmpeg-vscode) written four years ago.
+This guide is a modern version of [neptune46/ffmpeg-vscode](https://github.com/neptune46/ffmpeg-vscode) written four years ago. You can read itI recommend use these steps: 
 
 ## Preparation
 
@@ -10,28 +10,43 @@ Just follow [the official installation guide](https://www.msys2.org/#installatio
 
 ### 2. Install tools and packages for building FFmpeg
 
-These commands must be ran on **MSYS2** prompt.
+These commands must be ran on **mingw64** prompt.
+
+Press 'Y' whenever asked.
 
 ```bash
+pacman -Syu        // <-- when finished it will close the terminal! Reopen it and continue with the same command once again! 
+pacman -Syu
+pacman -S git 
+pacman -S make diffutils nasm yasm
+pacman -S mingw-w64-x86_64-gcc
+pacman -S mingw-w64-i686-gcc
+pacman -S mingw-w64-x86_64-gdb 
 pacman -S git nasm yasm
 ```
 ## Clone & Build FFmpeg
 
-These commands must be ran on **MSYS2** prompt.
+These commands must be ran on **mingw64** prompt.
 
 ```bash
 cd c:\msys64
 ./mingw64.exe
 cd ~
 git clone https://github.com/FFmpeg/FFmpeg.git
+```
+Download and copy SDL2-2.30.11 next to FFMpeg directory! (it's required for ffplay)
+
+```bash
 cd FFmpeg
-./configure --enable-debug=3 --disable-optimizations
+ ./configure --enable-debug --enable-static --disable-optimizations --enable-ffplay --extra-cflags="-I/home/{user_name}/SDL2-2.30.11/include" --extra-ldflags="-L/home/{user_name}SDL2-2.30.11/lib"
 make -j8
 ```
 
 After build, `ffmpeg_g.exe` will be genereated in `~/FFmpeg`. Congratulation!
 
 ## Debug FFmpeg on VSCode!
+
+Before start debugging in VSCode make sure mingw-w64-x86_64-gdb is installed (see launch.json "miDebuggerPath")
 
 If you downloaded MSYS2 following official guide, your FFmpeg project may be located in `C:\msys64\home\{user_name}\FFmpeg`.
 
